@@ -30,8 +30,35 @@ public class MindMapModel {
     }
   }
 
+  /**
+   * Save mind map as following format.
+   * id "description" child(s)
+   * 0 ”Computer” 2 7
+   * 1 ”windows” 5 6
+   * 2 ”OS” 1 3 4
+   * 3 ”IOS”
+   * 4 ”Linux”
+   * 5 ”DirectX”
+   * 6 ”Microsoft Office”
+   * 7 ” Network” 8 9
+   * 8 ” Wireless”
+   * 9 ”Cable”
+   */
   public void saveMindMap() {
     // TODO output current map to a text file
+    StringBuilder result = new StringBuilder();
+    for (Component component : mComponentList) {
+      result.append(component.mId);
+      result.append(" \"");
+      result.append(component.mDescription);
+      result.append("\"");
+      for (Component child : component.getChildList()) {
+        result.append(" ");
+        result.append(child.mId);
+      }
+      result.append("\n");
+    }
+    System.out.println(result.toString());
   }
 
   /**

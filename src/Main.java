@@ -13,6 +13,7 @@ public class Main {
     MindMapModel mindMapModel = new MindMapModel();
     mindMapModel.createNode(null);
     mindMapModel.createNode(null);
+    mindMapModel.saveMindMap();
     Assert.check(mindMapModel.getComponentListSize() == 1);
   }
 
@@ -23,6 +24,7 @@ public class Main {
         SimpleNodeFactory.createNode(
             mindMapModel.getComponentListSize(),
             null));
+    mindMapModel.saveMindMap();
     Assert.check(mindMapModel.getComponentListSize() == 1);
   }
 
