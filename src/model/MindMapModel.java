@@ -1,5 +1,6 @@
 package model;
 
+import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 
 import java.util.ArrayList;
@@ -21,12 +22,20 @@ public class MindMapModel {
       return;
     }
 
-    if (mComponentList.size() == 0) {
-      createNode(node.getParent());
-    } else {
-      if (Component.Type.Root != node.getType()) {
-        node.getParent().addChild(node);
-      }
+    // can have only one root
+    if (mComponentList.size() > 0 && Component.Type.Root == node.getType()) {
+      return;
+    }
+
+    // node duplicate
+    if (node.mId < mComponentList.size()) {
+      return;
+    }
+
+    mComponentList.add(node);
+
+    if (Component.Type.Node == node.getType()) {
+      node.getParent().addChild(node);
     }
   }
 
@@ -64,12 +73,12 @@ public class MindMapModel {
   /**
    * Create the root node on map.
    */
-  public void createNode(@Nullable Component parent) {
+  public void createNode(@NotNull String description, @Nullable Component parent) {
     if (null == parent && mComponentList.size() != 0) {
       return;
     }
 
-    mComponentList.add(SimpleNodeFactory.createNode(mComponentList.size(), parent));
+    mComponentList.add(SimpleNodeFactory.createNode(mComponentList.size(), description, parent));
   }
 
   public List<Component> getComponentList() {
