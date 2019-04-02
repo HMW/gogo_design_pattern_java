@@ -142,25 +142,25 @@ public class Main {
   }
 
   private static void testFileIo() {
+    String fileName = "temp.ggm";
     String text = "whoscall number one";
 
     try {
-      UtilsFile.write(text);
-      Assert.check(text.equals(UtilsFile.read()));
-    } catch (IOException e) {
+      UtilsFile.write(fileName, text);
+      Assert.check(text.equals(UtilsFile.read(fileName)));
+    } catch (Exception e) {
       System.err.print("e: " + e.getMessage());
     }
   }
 
   private static void testFileIoWithNewLine() {
+    String fileName = "temp.ggm";
     String text = "whoscall\nnumber\none";
 
     try {
-      UtilsFile.write(text);
-      String readText = UtilsFile.read();
-      System.out.print(readText);
-      Assert.check(text.equals(UtilsFile.read()));
-    } catch (IOException e) {
+      UtilsFile.write(fileName, text);
+      Assert.check(text.equals(UtilsFile.read(fileName)));
+    } catch (Exception e) {
       System.err.print("e: " + e.getMessage());
     }
   }
