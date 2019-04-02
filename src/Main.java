@@ -1,16 +1,25 @@
+import Utils.UtilsFile;
 import com.sun.tools.javac.util.Assert;
 import model.Component;
 import model.MindMapModel;
 import model.SimpleNodeFactory;
 
+import java.io.IOException;
+
 public class Main {
 
   public static void main(String[] args) {
+
+    // test node create & insert
     testCreateMultipleRoot();
     testInsertMultipleRoot();
     testInsertDuplicateChild();
     testInsertChild();
     testInsertSiblingAndChild();
+
+    // test file IO
+    testFileIo();
+    testFileIoWithNewLine();
   }
 
   private static void testCreateMultipleRoot() {
@@ -130,6 +139,30 @@ public class Main {
 
     mindMapModel.saveMindMap();
     Assert.check(mindMapModel.getComponentListSize() == 6);
+  }
+
+  private static void testFileIo() {
+    String text = "whoscall number one";
+
+    try {
+      UtilsFile.write(text);
+      Assert.check(text.equals(UtilsFile.read()));
+    } catch (IOException e) {
+      System.err.print("e: " + e.getMessage());
+    }
+  }
+
+  private static void testFileIoWithNewLine() {
+    String text = "whoscall\nnumber\none";
+
+    try {
+      UtilsFile.write(text);
+      String readText = UtilsFile.read();
+      System.out.print(readText);
+      Assert.check(text.equals(UtilsFile.read()));
+    } catch (IOException e) {
+      System.err.print("e: " + e.getMessage());
+    }
   }
 
 }

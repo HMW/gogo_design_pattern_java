@@ -11,7 +11,7 @@ public class MindMapModel {
   private List<Component> mComponentList = new ArrayList<>();
 
   public void createMindMap() {
-    // TODO TBD
+    // TODO Load map from a text file
   }
 
   /**
